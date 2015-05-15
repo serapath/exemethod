@@ -1,6 +1,6 @@
 {
   "name": "exemethod",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "\"require('exemethod')(); // => npm | script | globalcli | localcli | required | browserify\"",
   "main": "index.js",
   "scripts": {

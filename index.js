@@ -32,23 +32,23 @@ function exemethod (logger) {
       var isNPM     = cmd === 'npm';
       var isGlobal  = !isLocal;
       if (isNPM) {
-        return returnMessage('EXEC AS: npm run ...', 'npm');
+        return logger('EXEC AS: npm run ...', 'npm');
       } else if (isScript) {
-        return returnMessage('EXEC AS: standalone script', 'script');
+        return logger('EXEC AS: standalone script', 'script');
       } else if (isGlobal) {
-        return returnMessage('EXEC AS: node cli global', 'globalcli');
+        return logger('EXEC AS: node cli global', 'globalcli');
       } else if (isLocal){
-        return returnMessage('EXEC AS: node cli local', 'localcli');
+        return logger('EXEC AS: node cli local', 'localcli');
       }
     } else if (isRequired) {
-      return returnMessage('EXEC AS: node required(...)', 'required');
+      return logger('EXEC AS: node required(...)', 'required');
     } else {
       throw new Error('Current usage not supported. [weird node usage]');
     }
   } else if (isBrowserified) {
     var isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
-      return returnMessage('EXEC AS: browser required(...)', 'browersify');
+      return logger('EXEC AS: browser required(...)', 'browersify');
     } else {
       throw new Error('Current usage not supported. [browserified cli]');
     }
