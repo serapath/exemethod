@@ -1,12 +1,23 @@
-module.exports = exemethod;
-
+#! /usr/bin/env node
+'use strict';
+/******************************************************************************
+  DEPENDENCIES = CUSTOM SDK [Custom Software Development Kit]
+******************************************************************************/
+const path = require('path');
+/******************************************************************************
+  PARAMETER = ARGUMENT
+******************************************************************************/
+  // no cli tool
+  // $paramName = process.argv[2];
+/******************************************************************************
+  MODULE INTERNALS & HELPERS
+******************************************************************************/
 function returnMessage (msg, method) {
   console.log('==============================');
   console.log(msg);
   console.log('==============================');
   return method;
 }
-
 function exemethod (logger) {
   // logger: function (msg, method) { /*log here*/ return method; }
   // return [npm|script|globalcli|localcli|required|browserify]
@@ -25,10 +36,11 @@ function exemethod (logger) {
     var isRequired  = module.parent ? module.parent.parent ? true:false:false;
     var isCLI       = !isRequired;
     if (isCLI) {
-      var cmd       = process.env._.split(require('path').sep);
-      cmd           = cmd[cmd.length-1];
+      var fullpath  = process.env._.split(path.sep);
+      dir           = fullpath[0];
+      cmd           = fullpath[fullpath.length-1];
       var isLocal   = cmd === 'node' || cmd === 'iojs';
-      var isScript  = cmd === 'index.js';
+      var isScript  = dir === '.';
       var isNPM     = cmd === 'npm';
       var isGlobal  = !isLocal;
       if (isNPM) {
@@ -56,3 +68,7 @@ function exemethod (logger) {
     throw new Error('Current usage not supported. [unknown environment]');
   }
 }
+/******************************************************************************
+  EXPORT
+******************************************************************************/
+module.exports = exemethod;
