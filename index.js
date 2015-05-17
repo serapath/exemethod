@@ -37,8 +37,8 @@ function exemethod (logger) {
     var isCLI       = !isRequired;
     if (isCLI) {
       var fullpath  = process.env._.split(path.sep);
-      dir           = fullpath[0];
-      cmd           = fullpath[fullpath.length-1];
+      var dir       = fullpath[0];
+      var cmd       = fullpath[fullpath.length-1];
       var isLocal   = cmd === 'node' || cmd === 'iojs';
       var isScript  = dir === '.';
       var isNPM     = cmd === 'npm';
