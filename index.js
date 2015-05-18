@@ -60,7 +60,7 @@ function exemethod (logger) {
   } else if (isBrowserified) {
     var isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
-      return logger('EXEC AS: browser required(...)', 'browersify');
+      return logger('EXEC AS: browser required(...)', 'browserify');
     } else {
       throw new Error('Current usage not supported. [browserified cli]');
     }
