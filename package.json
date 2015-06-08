@@ -1,6 +1,6 @@
 {
   "name": "exemethod",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "\"require('exemethod')(); // => npm | script | globalcli | localcli | required | browserify\"",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/serapath/exemethod/issues"
   },
-  "homepage": "https://github.com/serapath/exemethod#readme"
+  "homepage": "https://github.com/serapath/exemethod#readme",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "devDependencies": {
+    "atomify": "^7.2.3",
+    "babelify": "^6.1.2",
+    "resrcify": "^1.1.3"
+  }
 }
