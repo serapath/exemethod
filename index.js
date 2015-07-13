@@ -31,6 +31,10 @@ function exemethod (logger) {
   } else {
     var isBrowserified  = process.title === 'browser';
   }
+  var isBrowserify      = process.argv[1].indexOf('browserify') !== -1;
+  if (isBrowserify) {
+    return logger('EXEC AS: browserify ...', 'browserify');
+  }
   var isNode            = !isBrowserified;
   if (isNode) {
     var isRequired  = module.parent ? module.parent.parent ? true:false:false;
@@ -60,7 +64,7 @@ function exemethod (logger) {
   } else if (isBrowserified) {
     var isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
-      return logger('EXEC AS: browser required(...)', 'browserify');
+      return logger('EXEC AS: browser required(...)', 'browser');
     } else {
       throw new Error('Current usage not supported. [browserified cli]');
     }

@@ -1,5 +1,5 @@
 # exemethod
-require('exemethod')(); // => npm | script | globalcli | localcli | required | browserify
+require('exemethod')(); // => npm | script | globalcli | localcli | required | browserify | browser
 
 It will tell your code how it was executed.
 
@@ -25,4 +25,5 @@ will result in:
   * (assumes something like `require('./myscript.js')` in "usemyscript.js")
 * `node ./myscript.js` => **localcli**
 * `browserify myscript.js > b.js` => **browserify**
+* `<script src='b.js'></script>` => **browser**
   * (assumes you load "b.js" in an html page (e.g. via *script tag*))
