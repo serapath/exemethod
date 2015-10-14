@@ -14,13 +14,19 @@ const path = require('path');
 ******************************************************************************/
 function returnMessage (msg, method) {
   console.log('==============================');
+  console.log('TO AVOID THIS MESSAGE, DO:')
+  console.log('  exemethod(function logger (msg, method) {')
+  console.log('  /*log here*/; return method; })')
+  console.log('RETURNS:')
+  console.log('[npm|shellscript|globalcli|localcli|required|browserify]')
+  console.log('==============================');
   console.log(msg);
   console.log('==============================');
   return method;
 }
 function exemethod (logger) {
-  // logger: function (msg, method) { /*log here*/ return method; }
-  // return [npm|script|globalcli|localcli|required|browserify]
+  // logger: function (msg, method) { /*log here*/; return method; }
+  // return [npm|shellscript|globalcli|localcli|required|browserify]
   logger = logger ? logger : returnMessage;
   if (process.platform === 'linux') {
     var isLinux         = true;
@@ -33,7 +39,7 @@ function exemethod (logger) {
   }
   var isBrowserify      = process.argv[1].indexOf('browserify') !== -1;
   if (isBrowserify) {
-    return logger('EXEC AS: browserify ...', 'browserify');
+    return logger('Current execution context: "browserify"', 'browserify');
   }
   var isNode            = !isBrowserified;
   if (isNode) {
@@ -48,23 +54,23 @@ function exemethod (logger) {
       var isNPM     = cmd === 'npm';
       var isGlobal  = !isLocal;
       if (isNPM) {
-        return logger('EXEC AS: npm run ...', 'npm');
+        return logger('Current execution context: "npm"', 'npm');
       } else if (isScript) {
-        return logger('EXEC AS: standalone script', 'script');
+        return logger('Current execution context:  "shellscript"', 'shellscript');
       } else if (isGlobal) {
-        return logger('EXEC AS: node cli global', 'globalcli');
+        return logger('Current execution context: "globalcli"', 'globalcli');
       } else if (isLocal){
-        return logger('EXEC AS: node cli local', 'localcli');
+        return logger('Current execution context: "localcli"', 'localcli');
       }
     } else if (isRequired) {
-      return logger('EXEC AS: node required(...)', 'required');
+      return logger('Current execution context: "required"', 'required');
     } else {
       throw new Error('Current usage not supported. [weird node usage]');
     }
   } else if (isBrowserified) {
     var isBrowser = typeof window !== 'undefined';
     if (isBrowser) {
-      return logger('EXEC AS: browser required(...)', 'browser');
+      return logger('Current execution context: "browser"', 'browser');
     } else {
       throw new Error('Current usage not supported. [browserified cli]');
     }
