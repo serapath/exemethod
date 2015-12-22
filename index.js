@@ -37,7 +37,11 @@ function exemethod (logger) {
   } else {
     var isBrowserified  = process.title === 'browser';
   }
-  var isBrowserify      = process.argv[1].indexOf('browserify') !== -1;
+  var isBrowserify      = (function checkBrowserify (argstr) {
+    return argstr.indexOf(' -t ') !== -1 ||
+           process.argv[1].indexOf('browserify') !== -1 ||
+           process.argv[1].indexOf('watchify') !== -1
+  })(process.argv.join(' '));
   if (isBrowserify) {
     return logger('Current execution context: "browserify"', 'browserify');
   }
